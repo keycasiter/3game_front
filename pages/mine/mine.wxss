@@ -1,42 +1,215 @@
 .container {
   min-height: 100vh;
-  background: #2c2723;
-  padding: 20rpx;
+  background: linear-gradient(to bottom right, #fff8e1, #ffecb3, #ffe082);
+  padding: 30rpx;
   box-sizing: border-box;
-  font-family: "隶书", "LiSu", serif;
-  padding-bottom: 80rpx;
 }
 
 /* 用户信息区域 */
 .user-info {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
+  width: 100%;
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
   padding: 30rpx;
   display: flex;
   align-items: center;
-  margin-bottom: 20rpx;
 }
 
 .avatar {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50rpx;
-  border: 2rpx solid #d4b887;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 4rpx solid #ffd54f;
   margin-right: 20rpx;
 }
 
 .user-detail {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10rpx;
 }
 
 .nickname {
-  font-size: 32rpx;
-  color: #d4b887;
+  font-size: 36rpx;
   font-weight: bold;
+  color: #795548;
+}
+
+.uid {
+  font-size: 24rpx;
+  color: #8d6e63;
+  margin-top: 4rpx;
+}
+
+.level-tag {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  background: linear-gradient(to right, #ffd54f, #ffca28);
+  color: #795548;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
+}
+
+/* 数据统计区域 */
+.stats-bar {
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  padding: 30rpx;
+  margin-top: 20rpx;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #795548;
+}
+
+/* 对战记录按钮样式 */
+.record-btn {
+  background: linear-gradient(135deg, #c87d2f, #e8a15d);
+  padding: 12rpx 24rpx;
+  border-radius: 30rpx;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  box-shadow: 0 4rpx 8rpx rgba(200, 125, 47, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.record-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+  border-radius: 30rpx;
+}
+
+.record-btn text {
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0 1rpx 2rpx rgba(0,0,0,0.1);
+}
+
+/* 添加hover效果 */
+.record-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 4rpx rgba(200, 125, 47, 0.1);
+  transition: all 0.2s;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  background: linear-gradient(to bottom right, #fff8e1, #ffecb3);
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-item .number {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #795548;
+}
+
+.stat-item .label {
+  font-size: 24rpx;
+  color: #8d6e63;
+  margin-top: 4rpx;
+}
+
+/* 功能菜单 */
+.menu-list {
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f5f6f7;
+  position: relative;
+}
+
+.menu-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+  color: #c87d2f;
+}
+
+.menu-text {
+  font-size: 28rpx;
+  color: #c87d2f;
+}
+
+/* 右侧箭头图标 */
+.arrow {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: auto; /* 将箭头推到右侧 */
+  opacity: 0.6;
+}
+
+/* 移除最后一个菜单项的底部边框 */
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+/* 授权弹窗 */
+.auth-modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.auth-content {
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.auth-btn {
+  background: linear-gradient(to right, #ffd54f, #ffca28);
+  color: #795548;
+  border-radius: 30rpx;
+}
+
+/* loading样式 */
+.loading-spinner {
+  border: 4rpx solid #ffecb3;
+  border-top: 4rpx solid #ffd54f;
+}
+
+/* 用户信息区域 */
+.user-info {
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border-radius: 12rpx; /* 圆角 */
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1); /* 阴影 */
 }
 
 .user-level-info {
@@ -45,22 +218,9 @@
   gap: 12rpx;
 }
 
-.uid {
-  font-size: 24rpx;
-  color: #d4b887;
-  opacity: 0.8;
-}
-
-.level-tag {
-  font-size: 20rpx;
-  padding: 2rpx 12rpx;
-  border-radius: 20rpx;
-  color: #2c2723;
-}
-
 /* 不同等级样式 */
 .level-0 {
-  background: #d4b887;  /* 普通 - 铜色 */
+  background: linear-gradient(to right, #ffd54f, #ffca28);  /* 普通 */
 }
 
 .level-1 {
@@ -76,31 +236,16 @@
   box-shadow: 0 0 10rpx rgba(180, 248, 255, 0.5);
 }
 
-.login-btn {
-  background: #d4b887;
-  color: #2c2723;
-  font-size: 32rpx;
-  padding: 20rpx 60rpx;
-  border-radius: 30rpx;
-  border: none;
-}
-
 /* 数据统计 */
 .stats-bar {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
+  background: #fff; /* 白色背景 */
+  border-radius: 12rpx;
+  margin: 20rpx;
   padding: 20rpx;
-  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   gap: 20rpx;
-}
-
-.stats-row {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
 }
 
 .stats-divider {
@@ -109,84 +254,18 @@
   margin: 0 40rpx;
 }
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8rpx;
-  flex: 1;
-}
-
-.stat-item .number {
-  font-size: 36rpx;
-  color: #d4b887;
-  font-weight: bold;
-}
-
-.stat-item .label {
-  font-size: 24rpx;
-  color: #d4b887;
-}
-
-/* 功能菜单 */
-.menu-list {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
-  margin-bottom: 20rpx;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30rpx;
-  border-bottom: 1px solid rgba(212, 184, 135, 0.3);
-  position: relative;
-}
-
-.menu-item:last-child {
-  border-bottom: none;
-}
-
-.menu-icon {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-120rpx);
-  width: 40rpx;
-  height: 40rpx;
-  opacity: 0.8;
-}
-
-.menu-text {
-  font-size: 28rpx;
-  color: #d4b887;
-  text-align: center;
-  margin-left: 0;
-}
-
-.arrow {
-  position: absolute;
-  right: 30rpx;
-  width: 32rpx;
-  height: 32rpx;
-  opacity: 0.6;
-}
-
 /* 版本信息 */
 .version-info {
   text-align: center;
   padding: 20rpx;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #2c2723;
+  margin-top: 20rpx;
+  position: relative; /* 改为相对定位 */
+  background: transparent;
 }
 
 .version-info text {
   font-size: 24rpx;
-  color: #d4b887;
+  color: #8d6e63;
   opacity: 0.6;
 }
 
@@ -201,19 +280,13 @@ button {
   font-family: "隶书", "LiSu", serif;
 }
 
-.menu-item .arrow {
-  width: 32rpx;
-  height: 32rpx;
-  margin-left: auto;
-}
-
 /* 退出登录按钮样式 */
 .logout {
   border-top: 1px solid rgba(212, 184, 135, 0.2);
 }
 
 .logout .menu-text {
-  color: #d4b887;
+  color: #c87d2f;
 }
 
 /* 登录蒙层 */
@@ -223,7 +296,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(44, 39, 35, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,7 +304,6 @@ button {
 }
 
 .login-form {
-  background: #3a342f;
   border: 1px solid #d4b887;
   border-radius: 8rpx;
   padding: 40rpx;
@@ -293,15 +365,6 @@ button {
   z-index: 99;
 }
 
-.auth-content {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
-  padding: 40rpx;
-  width: 80%;
-  text-align: center;
-}
-
 .auth-title {
   font-size: 32rpx;
   color: #d4b887;
@@ -312,14 +375,6 @@ button {
   font-size: 28rpx;
   color: #d4b887;
   margin-bottom: 30rpx;
-}
-
-.auth-btn {
-  background: #d4b887;
-  color: #2c2723;
-  font-size: 28rpx;
-  padding: 16rpx 0;
-  border-radius: 8rpx;
 }
 
 .auth-preview {
@@ -363,33 +418,10 @@ button {
   margin-bottom: 20rpx;
 }
 
-.avatar-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10rpx;
-}
-
 .avatar-tip {
   font-size: 24rpx;
   color: #d4b887;
   opacity: 0.8;
-}
-
-.preview-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 60rpx;
-  border: 2rpx solid #d4b887;
-}
-
-.preview-nickname {
-  font-size: 32rpx;
-  color: #d4b887;
-  margin-bottom: 10rpx;
 }
 
 .confirm-btn {
@@ -403,7 +435,6 @@ button {
 
 /* 常用武将和战法统计 */
 .freq-stats {
-  background: #3a342f;
   border: 1px solid #d4b887;
   border-radius: 8rpx;
   margin-bottom: 20rpx;
@@ -460,20 +491,11 @@ button {
 
 /* 常用武将样式 */
 .freq-generals {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
-  padding: 20rpx;
+  background: #fff;
+  border-radius: 12rpx;
   margin: 20rpx;
-}
-
-.section-title {
-  font-size: 28rpx;
-  color: #d4b887;
-  text-align: center;
-  display: block;
-  margin-bottom: 16rpx;
-  font-weight: bold;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
 }
 
 .general-list {
@@ -526,11 +548,11 @@ button {
 
 /* 常用阵容样式 */
 .freq-teams {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
-  padding: 20rpx;
+  background: #fff;
+  border-radius: 12rpx;
   margin: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
 }
 
 .team-list {
@@ -588,11 +610,11 @@ button {
 
 /* 常用战法样式 */
 .freq-tactics {
-  background: #3a342f;
-  border: 1px solid #d4b887;
-  border-radius: 8rpx;
-  padding: 20rpx;
+  background: #fff;
+  border-radius: 12rpx;
   margin: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
 }
 
 .tactics-list {
@@ -629,7 +651,6 @@ button {
 .freq-teams,
 .freq-tactics,
 .menu-list {
-  background: #3a342f;
   border: 1px solid #d4b887;
   border-radius: 8rpx;
   padding: 20rpx;
@@ -652,39 +673,34 @@ button {
   margin-bottom: 16rpx;
 }
 
-/* 对战记录按钮样式 */
-.record-btn {
-  background: #2c2723;
-  padding: 8rpx 20rpx;
-  border-radius: 4rpx;
-  border: 1px solid rgba(212, 184, 135, 0.3);
-}
-
-.record-btn text {
-  font-size: 24rpx;
-  color: #d4b887;
-}
-
 /* 分享按钮样式 */
 .share-btn {
-  background: none;
+  background: #fff;
   font-weight: normal;
-  line-height: normal;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+  margin: 40rpx 20rpx;
+  padding: 24rpx 0;
+  border-radius: 12rpx;
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-.share-btn::after {
-  border: none;
-}
-
-.share-btn .menu-text {
+  justify-content: center;
+  color: #c87d2f;
   font-size: 28rpx;
-  color: #d4b887;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  width: calc(100% - 40rpx);
+}
+
+.share-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+/* 添加hover效果 */
+.share-btn:active {
+  background: #fff8e1;
+  transform: scale(0.98);
+  transition: all 0.2s;
 }
 
 .level-info {
@@ -694,11 +710,11 @@ button {
 }
 
 .upgrade-btn {
-  font-size: 20rpx;
-  padding: 2rpx 12rpx;
-  background: #d4b887;
-  color: #2c2723;
-  border-radius: 20rpx;
+  background: #1296db;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
 }
 
 /* loading 蒙层样式 */
@@ -708,7 +724,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(44, 39, 35, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -725,8 +741,8 @@ button {
 .loading-spinner {
   width: 60rpx;
   height: 60rpx;
-  border: 4rpx solid #d4b887;
-  border-top-color: transparent;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #1296db; /* 旋转颜色 */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -785,19 +801,12 @@ button {
 }
 
 .login-btn {
-  background: #fff;
+  background: linear-gradient(to right, #ffd54f, #ffca28);
+  color: #795548;
+  font-size: 32rpx;
+  padding: 20rpx 60rpx;
+  border-radius: 30rpx; /* 圆角 */
   border: none;
-  border-radius: 44rpx;
-  padding: 0 48rpx;
-  height: 88rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12rpx;
-  font-size: 28rpx;
-  color: #2c2723;
-  font-weight: bold;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
 }
 
 .wechat-icon {

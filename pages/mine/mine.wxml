@@ -120,30 +120,34 @@
 
     <!-- 功能菜单 -->
     <view class="menu-list">
-      <view class="menu-item">
-        <button class="share-btn" open-type="share">
-          <text class="menu-text">分享小程序</text>
-        </button>
-      </view>
       <view class="menu-item" bindtap="navigateTo" data-url="/pages/feedback/feedback">
+        <image class="menu-icon" src="/images/icons/feedback.png" />
         <text class="menu-text">反馈&建议</text>
-      </view>
-      <view class="menu-item" bindtap="navigateTo" data-url="/pages/about/about">
-        <text class="menu-text">关于我们</text>
-      </view>
-      <!-- 退出登录按钮 -->
-      <view class="menu-item" wx:if="{{userInfo}}" bindtap="logout">
-        <image class="menu-icon" src="/images/icons/logout.png"/>
-        <text class="menu-text">退出登录</text>
         <image class="arrow" src="/images/icons/arrow-right.png"/>
       </view>
+      
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/about/about">
+        <image class="menu-icon" src="/images/icons/about.png" />
+        <text class="menu-text">关于我们</text>
+      </view>
+      
+      <view class="menu-item logout" bindtap="logout" wx:if="{{userInfo}}">
+        <image class="menu-icon" src="/images/icons/logout.png" />
+        <text class="menu-text">退出登录</text>
+      </view>
+    </view>
+
+    <!-- 分享按钮 -->
+    <button class="share-btn" open-type="share">
+      <image class="share-icon" src="/images/icons/share.png" />
+      <text>分享小程序</text>
+    </button>
+
+    <!-- 版本信息 -->
+    <view class="version-info">
+      <text>三战配将候 v1.0.0</text>
     </view>
   </block>
-
-  <!-- 版本信息 -->
-  <view class="version-info">
-    <text>三战配将候 v1.0.0</text>
-  </view>
 
   <!-- 用户信息授权弹窗 -->
   <view class="auth-modal" wx:if="{{showAuthModal}}">
