@@ -580,5 +580,42 @@ Page({
         });
       }
     });
+  },
+
+  getPhoneNumber(e) {
+    if (e.detail.errMsg === 'getPhoneNumber:ok') {
+      // 获取登录凭证
+      wx.login({
+        success: (loginRes) => {
+          if (loginRes.code) {
+            console.log('登录凭证:', loginRes.code);
+            
+            // 保存临时登录信息并显示用户信息授权弹窗
+            this.setData({
+              phoneCode: e.detail.code,
+              showAuthModal: true
+            });
+          } else {
+            wx.showToast({
+              title: '登录失败',
+              icon: 'none'
+            });
+          }
+        },
+        fail: (err) => {
+          console.error('获取登录凭证失败:', err);
+          wx.showToast({
+            title: '登录失败',
+            icon: 'none'
+          });
+        }
+      });
+    } else {
+      // 用户拒绝授权
+      wx.showToast({
+        title: '您拒绝了授权',
+        icon: 'none'
+      });
+    }
   }
 })

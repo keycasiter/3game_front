@@ -4,14 +4,12 @@
   <view class="login-section" wx:if="{{!userInfo}}">
     <image class="login-bg" src="/images/login-bg.png" mode="aspectFill"/>
     <view class="login-content">
-      <image class="avatar-placeholder" src="/images/default-avatar.png"/>
-      <text class="login-tip">登录体验更多功能</text>
       <button 
         class="login-btn"
         open-type="getPhoneNumber" 
         bindgetphonenumber="getPhoneNumber">
         <image class="wechat-icon" src="/images/wechat.png" mode="aspectFit"/>
-        手机号快捷登录
+        获取手机号
       </button>
     </view>
   </view>
