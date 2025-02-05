@@ -1,0 +1,18 @@
+<view class="container">
+  <!-- 加群按钮 -->
+  <view class="join-section">
+    <text class="join-tip">点击下方按钮，立即加入交流群</text>
+    <cell 
+      class="join-btn"
+      bind:startmessage='startmessage' 
+      bind:completemessage="completemessage" 
+      url='https://work.weixin.qq.com/gm/780f2a2dc6802caf8d0653f40d8ef96d'
+      text=""
+    />
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="bottom-tips">
+    <text>和三战玩家一起交流，期待您的加入！</text>
+  </view>
+</view> 

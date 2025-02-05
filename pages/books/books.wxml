@@ -1,0 +1,72 @@
+<view class="container">
+  <!-- 顶部搜索 -->
+  <view class="search-header">
+    <text class="search-title">兵书选择</text>
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="categories">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="*this"
+      class="category-item {{selectedCategory === item ? 'selected' : ''}}"
+      bindtap="selectCategory"
+      data-category="{{item}}"
+    >{{item}}</view>
+  </view>
+
+  <!-- 兵书列表容器 -->
+  <scroll-view 
+    class="books-container"
+    scroll-y="true"
+    enhanced="true"
+    show-scrollbar="false"
+  >
+    <!-- 大兵书 -->
+    <view class="books-section">
+      <view class="level-title">大兵书</view>
+      <view class="books-grid">
+        <view class="book-item {{item.selected ? 'selected' : ''}}"
+              wx:for="{{booksByLevel['2'] || []}}"
+              wx:key="id"
+              bindtap="selectBook"
+              data-id="{{item.id}}">
+          <text class="name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 小兵书 -->
+    <view class="books-section">
+      <view class="level-title">小兵书</view>
+      <view class="books-grid">
+        <view class="book-item {{item.selected ? 'selected' : ''}}"
+              wx:for="{{booksByLevel['3'] || []}}"
+              wx:key="id"
+              bindtap="selectBook"
+              data-id="{{item.id}}">
+          <text class="name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部确认按钮 -->
+  <view class="bottom-bar">
+    <view class="selected-count">
+      已选择 {{selectedBooks.length}}/3 本兵书
+    </view>
+    <view class="button-group">
+      <button class="reset-btn" bindtap="resetSelection">重置</button>
+      <button class="confirm-btn" bindtap="confirmSelection">确定</button>
+    </view>
+  </view>
+
+  <!-- 悬浮loading效果 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view> 

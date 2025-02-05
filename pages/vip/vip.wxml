@@ -1,0 +1,57 @@
+<view class="container">
+  <!-- 会员权益列表 -->
+  <view class="vip-benefits">
+    <text class="section-title">会员权益</text>
+    <view class="benefits-list">
+      <view class="benefit-item">
+        <image class="benefit-icon" src="/images/icons/vip-1.png" mode="aspectFit"/>
+        <view class="benefit-info">
+          <text class="benefit-title">无限对战次数</text>
+          <text class="benefit-desc">突破每日对战次数限制，随时进行模拟对战</text>
+        </view>
+      </view>
+      <view class="benefit-item">
+        <image class="benefit-icon" src="/images/icons/vip-2.png" mode="aspectFit"/>
+        <view class="benefit-info">
+          <text class="benefit-title">专属阵容推荐</text>
+          <text class="benefit-desc">基于海量对战数据，推荐最优武将搭配方案</text>
+        </view>
+      </view>
+      <view class="benefit-item">
+        <image class="benefit-icon" src="/images/icons/vip-3.png" mode="aspectFit"/>
+        <view class="benefit-info">
+          <text class="benefit-title">数据分析报告</text>
+          <text class="benefit-desc">查看详细的对战数据分析，了解胜负关键因素</text>
+        </view>
+      </view>
+      <view class="benefit-item">
+        <image class="benefit-icon" src="/images/icons/vip-4.png" mode="aspectFit"/>
+        <view class="benefit-info">
+          <text class="benefit-title">战法搭配建议</text>
+          <text class="benefit-desc">智能分析战法组合效果，提供最佳搭配方案</text>
+        </view>
+      </view>
+      <view class="benefit-item">
+        <image class="benefit-icon" src="/images/icons/vip-5.png" mode="aspectFit"/>
+        <view class="benefit-info">
+          <text class="benefit-title">专属客服服务</text>
+          <text class="benefit-desc">享受专属客服一对一咨询服务</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员价格 -->
+  <view class="vip-price">
+    <view class="price-info">
+      <text class="price-label">会员价格</text>
+      <text class="price-value">¥ 28.00</text>
+      <text class="price-desc">永久会员 / 一次性付费</text>
+    </view>
+  </view>
+
+  <!-- 支付按钮 -->
+  <view class="pay-section">
+    <button class="pay-btn" bindtap="handlePayment">立即开通</button>
+  </view>
+</view> 

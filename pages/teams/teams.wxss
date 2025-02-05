@@ -1,0 +1,212 @@
+.container {
+  padding: 20rpx;
+  background: #2c2723;
+  min-height: 100vh;
+}
+
+/* 搜索框 */
+.search-box {
+  position: relative;
+  margin: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #d4b887;
+}
+
+.search-icon {
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.6;
+}
+
+/* 势力分类 */
+.force-tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  margin: 20rpx;
+  border-radius: 8rpx;
+}
+
+.tab-item {
+  font-size: 28rpx;
+  color: #d4b887;
+  padding: 10rpx 30rpx;
+  border-radius: 6rpx;
+}
+
+.tab-item.active {
+  background: #d4b887;
+  color: #2c2723;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.team-item {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.team-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  font-weight: bold;
+}
+
+.generals-list {
+  display: flex;
+  gap: 20rpx;
+}
+
+.general-item {
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 8rpx;
+  padding: 16rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  min-width: 0;
+}
+
+.general-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+}
+
+.general-name {
+  color: #d4b887;
+  font-size: 24rpx;
+}
+
+.general-tactics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rpx;
+  background: rgba(58, 52, 47, 0.8);
+  padding: 8rpx;
+  border-radius: 4rpx;
+  width: 100%;
+  margin-top: 4rpx;
+}
+
+.tactic {
+  color: #d4b887;
+  opacity: 0.8;
+  font-size: 22rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}
+
+.team-description {
+  font-size: 24rpx;
+  color: #d4b887;
+  line-height: 1.5;
+  padding: 10rpx;
+  background: rgba(212, 184, 135, 0.1);
+  border-radius: 4rpx;
+}
+
+/* 兵种分类 */
+.arm-tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  margin: 20rpx;
+  border-radius: 8rpx;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.select-btn {
+  font-size: 24rpx;
+  color: #2c2723;
+  background: #d4b887;
+  padding: 8rpx 20rpx;
+  border-radius: 4rpx;
+}
+
+/* Loading效果 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #d4b887;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+.loading-text {
+  font-size: 26rpx;
+  color: #d4b887;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 暂无数据提示 */
+.empty-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx;
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+  margin: 20rpx;
+}
+
+/* Tab 禁用状态 */
+.tab-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;  /* 禁止点击 */
+}
+
+/* 搜索框禁用状态 */
+.search-box.disabled input {
+  opacity: 0.5;
+  pointer-events: none;
+} 

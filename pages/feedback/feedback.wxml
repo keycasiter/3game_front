@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="feedback-form">
+    <!-- 反馈内容输入 -->
+    <view class="content-input">
+      <text class="section-title">反馈内容</text>
+      <textarea 
+        class="feedback-textarea" 
+        placeholder="请详细描述您遇到的问题或建议..."
+        placeholder-style="color: rgba(212, 184, 135, 0.5)"
+        bindinput="onContentInput"
+        value="{{content}}"
+        maxlength="500"
+      ></textarea>
+      <text class="word-count">{{content.length}}/500</text>
+    </view>
+
+    <!-- 联系方式输入 -->
+    <view class="contact-input">
+      <text class="section-title">联系方式（选填）</text>
+      <input 
+        class="contact-field"
+        placeholder="请留下您的QQ/微信，方便我们联系您"
+        placeholder-style="color: rgba(212, 184, 135, 0.5)"
+        bindinput="onContactInput"
+        value="{{contact}}"
+      />
+    </view>
+
+    <!-- 提交按钮 -->
+    <button 
+      class="submit-btn" 
+      bindtap="submitFeedback"
+      disabled="{{!content}}">
+      提交反馈
+    </button>
+  </view>
+</view> 

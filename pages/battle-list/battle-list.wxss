@@ -1,0 +1,197 @@
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+  background: #f5e6d3;
+  background-image: 
+    linear-gradient(rgba(245, 230, 211, 0.92), rgba(245, 230, 211, 0.92)),
+    url('https://i.piantu.cn/i/15/2024/11/6732fd8b7b407.png');
+}
+
+.battle-list {
+  width: 100%;
+}
+
+.battle-item {
+  background: linear-gradient(145deg, rgba(255, 250, 245, 0.95), rgba(252, 243, 232, 0.95));
+  border: 1px solid rgba(181, 145, 85, 0.6);
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 
+    inset 0 1rpx 2rpx rgba(255, 255, 255, 0.8),
+    0 2rpx 4rpx rgba(139, 104, 49, 0.15);
+}
+
+.battle-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #4a443f;
+}
+
+.battle-time {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.win {
+  color: #d4b887;
+}
+
+.lose {
+  color: #f56c6c;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+
+.team {
+  flex: 1;
+  max-width: 42%;
+}
+
+.team-name {
+  font-size: 28rpx;
+  color: #d4b887;
+  margin-bottom: 8rpx;
+  font-weight: bold;
+}
+
+.generals {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 12rpx;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.generals::-webkit-scrollbar {
+  display: none;
+}
+
+.general-item {
+  margin-right: 0;
+  margin-bottom: 8rpx;
+  background: #2c2723;
+  padding: 8rpx;
+  border-radius: 8rpx;
+  width: 90rpx;
+  flex-shrink: 0;
+}
+
+.general-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.general-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-bottom: 8rpx;
+  border: 2rpx solid #d4b887;
+}
+
+.general-name {
+  font-size: 24rpx;
+  color: #fff;
+  text-shadow: 0 1rpx 4rpx rgba(0,0,0,0.5);
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.vs {
+  padding: 0 20rpx;
+  color: #d4b887;
+  font-size: 28rpx;
+  font-weight: bold;
+  flex: 0 0 auto;
+}
+
+.loading, .empty {
+  text-align: center;
+  color: #999;
+  padding: 30rpx;
+}
+
+.time-label {
+  color: #999;
+  margin-right: 8rpx;
+}
+
+/* 对战结果样式 */
+.battle-result.win {
+  color: #e6b322;  /* 胜利 - 金黄色 */
+}
+
+.battle-result.lose {
+  color: #d81e06;  /* 失败 - 红色 */
+}
+
+.battle-result.draw {
+  color: #8f8f8f;  /* 平局 - 灰色 */
+}
+
+.battle-result.advantage-draw {
+  color: #b8860b;  /* 优势平局 - 暗金色 */
+}
+
+.battle-result.inferiority-draw {
+  color: #cd5c5c;  /* 劣势平局 - 暗红色 */
+}
+
+/* loading 蒙层样式 */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(44, 39, 35, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #d4b887;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #d4b887;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 

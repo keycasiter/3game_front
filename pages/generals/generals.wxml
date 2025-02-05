@@ -1,0 +1,59 @@
+<view class="container">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <input 
+      type="text" 
+      placeholder="搜索武将" 
+      value="{{searchValue}}"
+      bindinput="onSearchInput"
+    />
+  </view>
+
+  <!-- 筛选标签 -->
+  <view class="filter-group">
+    <view class="filter-row">
+      <view class="filter-item {{selectedForce === '全部' ? 'selected' : ''}}" bindtap="selectForce" data-force="全部">全部</view>
+      <view class="filter-item {{selectedForce === '魏' ? 'selected' : ''}}" bindtap="selectForce" data-force="魏">魏</view>
+      <view class="filter-item {{selectedForce === '蜀' ? 'selected' : ''}}" bindtap="selectForce" data-force="蜀">蜀</view>
+      <view class="filter-item {{selectedForce === '吴' ? 'selected' : ''}}" bindtap="selectForce" data-force="吴">吴</view>
+      <view class="filter-item {{selectedForce === '群' ? 'selected' : ''}}" bindtap="selectForce" data-force="群">群</view>
+    </view>
+
+    <view class="filter-row">
+      <view class="filter-item {{selectedRank === '全部' ? 'selected' : ''}}" bindtap="selectRank" data-rank="全部">全部</view>
+      <view class="filter-item {{selectedRank === 'S' ? 'selected' : ''}}" bindtap="selectRank" data-rank="S">S</view>
+      <view class="filter-item {{selectedRank === 'A' ? 'selected' : ''}}" bindtap="selectRank" data-rank="A">A</view>
+      <view class="filter-item {{selectedRank === 'B' ? 'selected' : ''}}" bindtap="selectRank" data-rank="B">B</view>
+      <view class="filter-item {{selectedRank === 'C' ? 'selected' : ''}}" bindtap="selectRank" data-rank="C">C</view>
+    </view>
+
+    <view class="filter-row">
+      <view class="filter-item {{selectedCost === '全部' ? 'selected' : ''}}" bindtap="selectCost" data-cost="全部">全部</view>
+      <view class="filter-item {{selectedCost === '3御' ? 'selected' : ''}}" bindtap="selectCost" data-cost="3御">3御</view>
+      <view class="filter-item {{selectedCost === '4御' ? 'selected' : ''}}" bindtap="selectCost" data-cost="4御">4御</view>
+      <view class="filter-item {{selectedCost === '5御' ? 'selected' : ''}}" bindtap="selectCost" data-cost="5御">5御</view>
+      <view class="filter-item {{selectedCost === '6御' ? 'selected' : ''}}" bindtap="selectCost" data-cost="6御">6御</view>
+      <view class="filter-item {{selectedCost === '7御' ? 'selected' : ''}}" bindtap="selectCost" data-cost="7御">7御</view>
+    </view>
+  </view>
+
+  <!-- 武将列表 -->
+  <view class="general-grid">
+    <!-- 空数据提示 -->
+    <view class="empty-tip" wx:if="{{!loading && generals.length === 0}}">
+      <text>暂无数据</text>
+    </view>
+    <view class="general-item" wx:for="{{generals}}" wx:key="id" bindtap="selectGeneral" data-id="{{item.id}}">
+      <image class="general-avatar" src="{{item.avatar}}" mode="aspectFill"/>
+      <text class="general-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 悬浮loading效果 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view> 

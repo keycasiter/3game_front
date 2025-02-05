@@ -1,0 +1,123 @@
+.container {
+  min-height: 100vh;
+  background: #2c2723;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.about-section,
+.contact-section {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.intro-content {
+  padding: 20rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+.intro-text {
+  font-size: 26rpx;
+  color: #d4b887;
+  line-height: 1.6;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+.contact-label {
+  font-size: 26rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.contact-value {
+  font-size: 26rpx;
+  color: #d4b887;
+  margin: 0 20rpx;
+  flex: 1;
+}
+
+.copy-btn {
+  font-size: 24rpx;
+  color: #d4b887;
+  background: rgba(212, 184, 135, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.copy-btn:active {
+  opacity: 0.8;
+}
+
+/* 分享按钮样式 */
+.share-section {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.share-btn {
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+  padding: 20rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.share-btn::after {
+  border: none;  /* 移除按钮默认边框 */
+}
+
+.share-text {
+  font-size: 26rpx;
+  color: #d4b887;
+}
+
+.platform-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+
+/* 调整联系项布局以适应图标 */
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+} 

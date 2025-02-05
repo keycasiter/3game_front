@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+
+  <view class="battle-list">
+    <view class="battle-item" 
+          wx:for="{{battleList}}" 
+          wx:key="index"
+          bindtap="onBattleItemClick"
+          data-battle="{{item}}">
+      <view class="battle-result {{item.FightingTeam.BattleResult === 1 ? 'win' : item.FightingTeam.BattleResult === 2 ? 'lose' : item.FightingTeam.BattleResult === 3 ? 'draw' : item.FightingTeam.BattleResult === 4 ? 'advantage-draw' : 'inferiority-draw'}}">
+        <text>{{item.FightingTeam.BattleResult === 1 ? '胜利' : item.FightingTeam.BattleResult === 2 ? '失败' : item.FightingTeam.BattleResult === 3 ? '平局' : item.FightingTeam.BattleResult === 4 ? '优势平局' : '劣势平局'}}</text>
+        <view class="battle-time">
+          <text class="time-label">对战时间：</text>
+          <text>{{item.formattedTime}}</text>
+        </view>
+      </view>
+      <view class="battle-info">
+        <view class="team-info">
+          <view class="team my-team">
+            <text class="team-name">我方</text>
+            <view class="generals">
+              <view class="general-item"
+                    wx:for="{{item.FightingTeam.BattleTeam.BattleGenerals}}" 
+                    wx:for-item="general" 
+                    wx:key="index">
+                <view class="general-info">
+                  <image class="general-avatar" src="{{general.BaseInfo.AvatarUrl}}" mode="aspectFill"/>
+                  <text class="general-name">{{general.BaseInfo.Name}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="vs">VS</view>
+          <view class="team enemy-team">
+            <text class="team-name">敌方</text>
+            <view class="generals">
+              <view class="general-item"
+                    wx:for="{{item.EnemyTeam.BattleTeam.BattleGenerals}}" 
+                    wx:for-item="general" 
+                    wx:key="index">
+                <view class="general-info">
+                  <image class="general-avatar" src="{{general.BaseInfo.AvatarUrl}}" mode="aspectFill"/>
+                  <text class="general-name">{{general.BaseInfo.Name}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="empty" wx:if="{{!loading && battleList.length === 0}}">暂无对战记录</view>
+</view> 

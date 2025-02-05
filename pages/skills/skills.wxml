@@ -1,0 +1,83 @@
+<view class="container">
+  <!-- 顶部搜索 -->
+  <view class="search-header">
+    <text class="search-title">特技选择</text>
+    <view class="search-box">
+      <input 
+        type="text" 
+        placeholder="请输入特技名称" 
+        value="{{searchValue}}" 
+        bindinput="onSearchInput"
+      />
+      <image class="search-icon" src="/images/icons/search.png"/>
+    </view>
+  </view>
+
+  <!-- 筛选区域 -->
+  <view class="filter-section">
+    <!-- 品质分类标签 -->
+    <view class="filter-group">
+      <view 
+        wx:for="{{categories}}" 
+        wx:key="*this"
+        class="filter-item {{selectedCategory === item ? 'selected' : ''}}"
+        bindtap="selectCategory"
+        data-category="{{item}}"
+      >{{item}}</view>
+    </view>
+
+    <!-- 类型分类标签 -->
+    <view class="filter-group">
+      <view 
+        wx:for="{{types}}" 
+        wx:key="*this"
+        class="filter-item {{selectedType === item ? 'selected' : ''}}"
+        bindtap="selectType"
+        data-type="{{item}}"
+      >{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 特技列表容器 -->
+  <scroll-view 
+    class="skills-container"
+    scroll-y="true"
+    enhanced="true"
+    show-scrollbar="false"
+  >
+    <view class="skills-grid" wx:if="{{skills.length > 0}}">
+      <view class="skill-item {{item.selected ? 'selected' : ''}}" 
+            wx:for="{{skills}}" 
+            wx:key="id"
+            bindtap="selectSkill"
+            data-id="{{item.id}}">
+        <text class="type-tag type-{{item.type}}">{{item.typeText}}</text>
+        <text class="rank">{{item.rank}}</text>
+        <text class="name">{{item.name}}</text>
+      </view>
+    </view>
+    <!-- 空数据提示 -->
+    <view class="empty-tip" wx:if="{{!loading && skills.length === 0}}">
+      <text>暂无数据</text>
+    </view>
+  </scroll-view>
+
+  <!-- 底部确认按钮 -->
+  <view class="bottom-bar">
+    <view class="selected-count">
+      已选择 {{selectedSkills.length}} 个特技
+    </view>
+    <view class="button-group">
+      <button class="reset-btn" bindtap="resetSelection">重置</button>
+      <button class="confirm-btn" bindtap="confirmSelection">确定</button>
+    </view>
+  </view>
+
+  <!-- 悬浮loading效果 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view> 

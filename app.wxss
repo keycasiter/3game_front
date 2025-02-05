@@ -1,0 +1,65 @@
+/* 全局样式 */
+page {
+  font-size: 28rpx;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.container {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 常用flex布局 */
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 武将列表容器 */
+.generals-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 30rpx 40rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 单个武将卡片 */
+.general-item {
+  background: #fff;
+  border-radius: 8rpx;
+  padding: 20rpx 10rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 武将头像 */
+.general-avatar {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 8rpx;
+  margin-bottom: 12rpx;
+}
+
+/* 武将名称 */
+.general-name {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+} 

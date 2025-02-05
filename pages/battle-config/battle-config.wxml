@@ -1,0 +1,361 @@
+<view class="container">
+  <!-- 队伍切换按钮 -->
+  <view class="team-switch">
+    <button class="{{currentTeam === 'team1' ? 'active' : ''}}" bindtap="switchTeam" data-team="team1">我方队伍</button>
+    <view class="vs-icon">VS</view>
+    <button class="{{currentTeam === 'team2' ? 'active' : ''}}" bindtap="switchTeam" data-team="team2">敌方队伍</button>
+  </view>
+
+  <!-- 角色列表 -->
+  <view class="character-list">
+    <block wx:for="{{teams[currentTeam].characters}}" wx:key="id" wx:for-index="characterIndex" wx:for-item="character">
+      <view class="character-card">
+        <!-- 角色图片和名 -->
+        <view class="character-image-container">
+          <view class="character-role">{{characterIndex === 0 ? '主将' : '副将'}}</view>
+          <image 
+            class="character-image" 
+            src="{{character.avatar}}"
+            mode="aspectFill"
+            wx:if="{{character.avatar}}"
+          />
+          <view class="character-plus" wx:else>+</view>
+          <view class="character-overlay" 
+            catchtap="goToGeneralSelect" 
+            data-character-id="{{characterIndex}}">
+          </view>
+        </view>
+        <!-- 添加武将名称展示 -->
+        <view class="character-name">
+          {{character.name || ''}}
+        </view>
+        <!-- 进阶等级 -->
+        <view class="stars-container">
+          <view class="stars-track">
+            <view wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="*this" wx:for-item="starIndex"
+                  class="star {{starIndex <= character.dots ? 'active' : ''}}"
+                  data-character-id="{{characterIndex}}"
+                  data-index="{{starIndex - 1}}"
+                  bindtap="selectStar">★</view>
+          </view>
+        </view>
+        
+        <!-- 等级和兵力 -->
+        <view class="level-power">
+          <view class="level-item" bindtap="showLevelSlider" data-character-id="{{characterIndex}}">
+            <text class="label">等级</text>
+            <text class="value">{{character.level}}</text>
+          </view>
+          <view class="power-item" bindtap="showPowerSlider" data-character-id="{{characterIndex}}">
+            <text class="label">兵力</text>
+            <text class="value">{{character.power}}</text>
+          </view>
+        </view>
+        
+        <!-- 兵力选择弹出层 -->
+        <view class="power-popup {{showPowerPopup ? 'show' : ''}}" catchtouchmove="preventTouchMove">
+          <view class="popup-content">
+            <view class="popup-header">
+              <text>选择兵力</text>
+              <text class="power-value">{{tempPower}}</text>
+            </view>
+            <slider 
+              min="1" 
+              max="10000" 
+              value="{{tempPower}}" 
+              block-size="20" 
+              activeColor="#1296db"
+              backgroundColor="#ddd"
+              bindchanging="onPowerSliding"
+              bindchange="onPowerChange"
+            />
+            <view class="popup-footer">
+              <button class="cancel-btn" bindtap="hidePowerSlider">取消</button>
+              <button class="confirm-btn" bindtap="confirmPower">确定</button>
+            </view>
+          </view>
+        </view>
+
+        <!-- 等级选择弹出层 -->
+        <view class="level-popup {{showLevelPopup ? 'show' : ''}}" catchtouchmove="preventTouchMove">
+          <view class="popup-content">
+            <view class="popup-header">
+              <text>选择等级</text>
+              <text class="level-value">{{tempLevel}}</text>
+            </view>
+            <slider 
+              min="1" 
+              max="50" 
+              value="{{tempLevel}}" 
+              block-size="20" 
+              activeColor="#1296db"
+              backgroundColor="#ddd"
+              bindchanging="onLevelSliding"
+              bindchange="onLevelChange"
+            />
+            <view class="popup-footer">
+              <button class="cancel-btn" bindtap="hideLevelSlider">取消</button>
+              <button class="confirm-btn" bindtap="confirmLevel">确定</button>
+            </view>
+          </view>
+        </view>
+
+        <!-- 称号 -->
+        <view class="title">
+          <view class="title-btn">
+            <block wx:if="{{character.selfTactic.name}}">
+              <text class="tactic-rank {{character.selfTactic.rank}}">{{character.selfTactic.rank}}</text>
+              <view class="tactic-name-container">
+                <text>{{character.selfTactic.name}}</text>
+              </view>
+            </block>
+            <block wx:else>
+              <text class="tactic-plus">+</text>
+              <view class="tactic-name-container">
+                <text>自带战法</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 战法选择 -->
+        <view class="tactics">
+          <view class="tactic-btn" bindtap="goToTacticSelect" data-index="0" data-character-id="{{characterIndex}}">
+            <block wx:if="{{character.tactics[0].name}}">
+              <text class="tactic-rank {{character.tactics[0].rank}}">{{character.tactics[0].rank}}</text>
+              <view class="tactic-name-container">
+                <text>{{character.tactics[0].name}}</text>
+              </view>
+            </block>
+            <block wx:else>
+              <text class="tactic-plus">+</text>
+              <view class="tactic-name-container">
+                <text>选择战法</text>
+              </view>
+            </block>
+          </view>
+          <view class="tactic-btn" bindtap="goToTacticSelect" data-index="1" data-character-id="{{characterIndex}}">
+            <block wx:if="{{character.tactics[1].name}}">
+              <text class="tactic-rank {{character.tactics[1].rank}}">{{character.tactics[1].rank}}</text>
+              <view class="tactic-name-container">
+                <text>{{character.tactics[1].name}}</text>
+              </view>
+            </block>
+            <block wx:else>
+              <text class="tactic-plus">+</text>
+              <view class="tactic-name-container">
+                <text>选择战法</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 兵书显示部分 -->
+        <view class="book-select {{character.books && character.books.length ? 'has-books' : ''}}" 
+              bindtap="goToBookSelect" 
+              data-character-id="{{characterIndex}}">
+          <block wx:if="{{character.books && character.books.length}}">
+            <view class="main-book-section">
+              <text class="main-book">{{character.books[0].name || ''}}</text>
+            </view>
+            <view class="sub-books-section">
+              <view class="sub-book-main">
+                <text class="sub-book">{{character.books[1].name || ''}}</text>
+              </view>
+              <view class="other-sub-books">
+                <text class="sub-book">{{character.books[2].name || ''}}</text>
+                <text class="sub-book">{{character.books[3].name || ''}}</text>
+              </view>
+            </view>
+          </block>
+          <view class="book-text" wx:else>
+            <text class="book-plus">+</text>
+            <text>选择兵书</text>
+          </view>
+        </view>
+
+        <!-- 评级圆圈 -->
+        <view class="ratings">
+          <text 
+            class="rating {{character.troopRank === 'S' ? 'selected' : ''}}" 
+            bindtap="selectTroopRank" 
+            data-rank="S" 
+            data-character-id="{{characterIndex}}">S</text>
+          <text 
+            class="rating {{character.troopRank === 'A' ? 'selected' : ''}}" 
+            bindtap="selectTroopRank" 
+            data-rank="A" 
+            data-character-id="{{characterIndex}}">A</text>
+          <text 
+            class="rating {{character.troopRank === 'B' ? 'selected' : ''}}" 
+            bindtap="selectTroopRank" 
+            data-rank="B" 
+            data-character-id="{{characterIndex}}">B</text>
+          <text 
+            class="rating {{character.troopRank === 'C' ? 'selected' : ''}}" 
+            bindtap="selectTroopRank" 
+            data-rank="C" 
+            data-character-id="{{characterIndex}}">C</text>
+        </view>
+
+        <!-- 性调整弹出层 -->
+        <view class="stats-popup {{showStatsPopup ? 'show' : ''}}" catchtouchmove="preventTouchMove">
+          <view class="popup-content">
+            <view class="popup-header">
+              <text>调整属性</text>
+            </view>
+            <view class="stats-sliders">
+              <view class="slider-item">
+                <text>武力</text>
+                <text class="stat-value">{{tempStats.attack}}</text>
+                <slider 
+                  min="0" 
+                  max="100" 
+                  value="{{tempStats.attack}}" 
+                  block-size="20" 
+                  activeColor="#1296db"
+                  backgroundColor="#ddd"
+                  bindchanging="onStatSliding"
+                  bindchange="onStatChange"
+                  data-stat="attack"
+                />
+              </view>
+              <view class="slider-item">
+                <text>智力</text>
+                <text class="stat-value">{{tempStats.intelligence}}</text>
+                <slider 
+                  min="0" 
+                  max="100" 
+                  value="{{tempStats.intelligence}}" 
+                  block-size="20" 
+                  activeColor="#1296db"
+                  backgroundColor="#ddd"
+                  bindchanging="onStatSliding"
+                  bindchange="onStatChange"
+                  data-stat="intelligence"
+                />
+              </view>
+              <view class="slider-item">
+                <text>统率</text>
+                <text class="stat-value">{{tempStats.leadership}}</text>
+                <slider 
+                  min="0" 
+                  max="100" 
+                  value="{{tempStats.leadership}}" 
+                  block-size="20" 
+                  activeColor="#1296db"
+                  backgroundColor="#ddd"
+                  bindchanging="onStatSliding"
+                  bindchange="onStatChange"
+                  data-stat="leadership"
+                />
+              </view>
+              <view class="slider-item">
+                <text>速度</text>
+                <text class="stat-value">{{tempStats.speed}}</text>
+                <slider 
+                  min="0" 
+                  max="100" 
+                  value="{{tempStats.speed}}" 
+                  block-size="20" 
+                  activeColor="#1296db"
+                  backgroundColor="#ddd"
+                  bindchanging="onStatSliding"
+                  bindchange="onStatChange"
+                  data-stat="speed"
+                />
+              </view>
+            </view>
+            <view class="popup-footer">
+              <button class="cancel-btn" bindtap="hideStatsPopup">取消</button>
+              <button class="confirm-btn" bindtap="confirmStats">确定</button>
+            </view>
+          </view>
+        </view>
+
+        <!-- 特技按钮和数字 -->
+        <view class="skill-actions">
+          <view class="skill-group">
+            <text 
+              class="skill-btn {{character.skillButtons.dian ? 'selected' : ''}}" 
+              bindtap="toggleSkillButton" 
+              data-character-id="{{characterIndex}}"
+              data-type="dian">典</text>
+            <text 
+              class="skill-btn {{character.skillButtons.dong ? 'selected' : ''}}" 
+              bindtap="toggleSkillButton" 
+              data-character-id="{{characterIndex}}"
+              data-type="dong">动</text>
+          </view>
+          <view class="skill-number" bindtap="goToSkillSelect" data-character-id="{{characterIndex}}">
+            <text>特技</text>
+            <text class="number">+{{character.specialTechs ? character.specialTechs.length : 0}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 兵种选择 -->
+  <view class="troop-selection">
+    <text class="selection-title">兵种选择</text>
+    <view class="troop-buttons">
+      <button 
+        class="troop-button {{(currentTeam === 'team1' ? selectedTroop : enemySelectedTroop) === '骑兵' ? 'selected' : ''}}" 
+        bindtap="selectTroop" 
+        data-troop="骑兵">骑兵</button>
+      <button 
+        class="troop-button {{(currentTeam === 'team1' ? selectedTroop : enemySelectedTroop) === '盾兵' ? 'selected' : ''}}" 
+        bindtap="selectTroop" 
+        data-troop="盾兵">盾兵</button>
+      <button 
+        class="troop-button {{(currentTeam === 'team1' ? selectedTroop : enemySelectedTroop) === '弓兵' ? 'selected' : ''}}" 
+        bindtap="selectTroop" 
+        data-troop="弓兵">弓兵</button>
+      <button 
+        class="troop-button {{(currentTeam === 'team1' ? selectedTroop : enemySelectedTroop) === '枪兵' ? 'selected' : ''}}" 
+        bindtap="selectTroop" 
+        data-troop="枪兵">枪兵</button>
+    </view>
+  </view>
+
+  <!-- 快捷配置区域 -->
+  <view class="quick-config">
+    <text class="section-title">快捷配置</text>
+    <view class="quick-actions">
+      <button bindtap="maxUpgrade">一键满红</button>
+      <button bindtap="resetCharacter">一键白板</button>
+      <button bindtap="resetAll">重置</button>
+    </view>
+  </view>
+
+  <!-- 开始对战按钮 -->
+  <view class="battle-btn-container">
+    <button class="battle-btn" bindtap="startBattle">开始对战</button>
+  </view>
+
+  <!-- 推荐按钮 -->
+  <view class="recommend-btn" catchtap="goToTeamRecommend">
+    <text>阵容</text>
+  </view>
+
+  <!-- 页面跳转loading效果 -->
+  <view class="page-loading-mask" wx:if="{{showPageLoading}}">
+    <view class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在跳转推荐阵容~</text>
+    </view>
+  </view>
+
+  <!-- 重置确认弹窗 -->
+  <view class="reset-popup {{showResetPopup ? 'show' : ''}}" catchtouchmove="preventTouchMove">
+    <view class="reset-popup-content">
+      <view class="reset-popup-title">确认重置</view>
+      <view class="reset-popup-text">是否确认重置所有数据？</view>
+      <view class="reset-popup-buttons">
+        <button class="reset-popup-btn cancel" bindtap="hideResetPopup">取消</button>
+        <button class="reset-popup-btn confirm" bindtap="confirmReset">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

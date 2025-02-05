@@ -1,0 +1,312 @@
+<!-- 对战结果页面 -->
+<view class="container">
+  <!-- 分享按钮 -->
+  <button class="share-btn" open-type="share">
+    <text>分享战报</text>
+  </button>
+
+  <!-- 对战结果 -->
+  <view class="battle-result">
+    <text class="result-text {{currentTeam === 'my' ? (battleResult.BattleResultStatistics.FightingTeam.BattleResult === 1 ? 'win' : battleResult.BattleResultStatistics.FightingTeam.BattleResult === 2 ? 'lose' : battleResult.BattleResultStatistics.FightingTeam.BattleResult === 3 ? 'draw' : battleResult.BattleResultStatistics.FightingTeam.BattleResult === 4 ? 'advantage-draw' : 'inferiority-draw') : (battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 1 ? 'win' : battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 2 ? 'lose' : battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 3 ? 'draw' : battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 4 ? 'advantage-draw' : 'inferiority-draw')}}">
+      {{currentTeam === 'my' ? (battleResult.BattleResultStatistics.FightingTeam.BattleResult === 1 ? '胜利' : battleResult.BattleResultStatistics.FightingTeam.BattleResult === 2 ? '失败' : battleResult.BattleResultStatistics.FightingTeam.BattleResult === 3 ? '平局' : battleResult.BattleResultStatistics.FightingTeam.BattleResult === 4 ? '优势平局' : '劣势平局') : (battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 1 ? '胜利' : battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 2 ? '失败' : battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 3 ? '平局' : battleResult.BattleResultStatistics.EnemyTeam.BattleResult === 4 ? '优势平局' : '劣势平局')}}
+    </text>
+  </view>
+
+  <!-- 队伍切换按钮 -->
+  <view class="team-switch">
+    <button class="{{currentTeam === 'my' ? 'active' : ''}}" 
+            bindtap="switchTeam" 
+            data-team="my">我方队伍</button>
+    <view class="vs-icon">VS</view>
+    <button class="{{currentTeam === 'enemy' ? 'active' : ''}}" 
+            bindtap="switchTeam" 
+            data-team="enemy">敌方队伍</button>
+  </view>
+
+  <!-- 当前显示的队伍信息 -->
+  <view class="team-info">
+    <!-- 队伍数据统计组件 -->
+    <template name="team-stats">
+      <view class="team-stats">
+        <text class="stats-title">队伍数据统计</text>
+        <view class="stats-grid">
+          <!-- 兵力血条 -->
+          <view class="power-bar-container">
+            <view class="power-bar">
+              <view class="power-progress" style="width: {{(team.BattleTeam.RemainNum / team.BattleTeam.SoliderNum) * 100}}%"></view>
+            </view>
+            <text class="power-text">兵力 {{team.BattleTeam.RemainNum}}/{{team.BattleTeam.SoliderNum}}</text>
+          </view>
+          
+          <!-- 其他统计数据 -->
+          <view class="stats-item">
+            <text class="stats-label">杀敌数</text>
+            <text class="stats-value">{{team.BattleTeam.KillSoliderNum}}</text>
+          </view>
+          <view class="stats-item">
+            <text class="stats-label">恢复数</text>
+            <text class="stats-value">{{team.BattleTeam.ResumeSoliderNum}}</text>
+          </view>
+        </view>
+      </view>
+    </template>
+
+    <!-- 使用队伍数据统计组件 -->
+    <template is="team-stats" data="{{team: currentTeamData}}" />
+
+    <!-- 武将列表 -->
+    <view class="generals-list">
+      <view class="general-card" 
+        wx:for="{{currentTeam === 'my' ? battleResult.BattleResultStatistics.FightingTeam.BattleTeam.BattleGenerals : battleResult.BattleResultStatistics.EnemyTeam.BattleTeam.BattleGenerals}}" 
+        wx:key="index">
+        <!-- 武将基本信息 -->
+        <view class="general-header">
+          <image class="avatar" src="{{item.BaseInfo.AvatarUrl}}" mode="aspectFill"/>
+          <text class="name">{{item.BaseInfo.Name}}</text>
+          <text class="role">{{index === 0 ? '主将' : '副将'}}</text>
+        </view>
+
+        <!-- 武将战斗数据 -->
+        <view class="general-stats">
+          <!-- 兵力血条 -->
+          <view class="power-bar-container">
+            <view class="power-bar">
+              <view class="power-progress" style="width: {{(item.RemainNum / item.SoldierNum) * 100}}%"></view>
+            </view>
+            <text class="power-text">{{item.RemainNum}}/{{item.SoldierNum}}</text>
+          </view>
+
+          <!-- 其他统计数据 -->
+          <view class="stat-row">
+            <text class="label">杀敌</text>
+            <text class="value">{{item.KillSoliderNum}}</text>
+          </view>
+          <view class="stat-row">
+            <text class="label">恢复</text>
+            <text class="value">{{item.ResumeSoliderNum}}</text>
+          </view>
+        </view>
+
+        <!-- 战斗统计区域 -->
+        <view class="battle-statistics tactic-statistics">
+          <!-- 战法统计 -->
+          <view class="tactic-list">
+            <!-- 战法列表 -->
+            <view class="tactic-item" wx:for="{{item.GeneralBattleStatistics.TacticStatisticsList}}" wx:key="TacticId" wx:for-item="tactic">
+              <text class="tactic-name">{{tactic.TacticName}}</text>
+              <view class="tactic-stats">
+                <text class="stat-text">发动 {{tactic.TriggerTimes}}</text>
+                <text class="stat-text">杀敌 {{tactic.KillSoliderNum}}</text>
+                <text class="stat-text">恢复 {{tactic.ResumeSoliderNum}}</text>
+              </view>
+            </view>
+
+            <!-- 普通攻击统计 -->
+            <view class="tactic-item">
+              <text class="tactic-name">普通攻击</text>
+              <view class="tactic-stats">
+                <text class="stat-text">发动 {{item.GeneralBattleStatistics.GeneralAttackStatistics.TriggerTimes}}</text>
+                <text class="stat-text">杀敌 {{item.GeneralBattleStatistics.GeneralAttackStatistics.KillSoliderNum}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view style="color: #fff; padding: 20rpx;" wx:if="{{!battleResult}}">
+  加载中...数据状态: {{battleResult ? '已加载' : '未加载'}}
+</view> 
+
+<!-- 在页面底部添加三个统计区域 -->
+<view class="statistics-container">
+  <!-- 队伍回合数据区域 -->
+  <view class="battle-statistics">
+    <text class="section-title">队伍回合数据</text>
+    <view class="round-content">
+      <view class="round-header">
+        <text class="round-label">回合</text>
+        <text class="round-label">剩余兵力</text>
+        <text class="round-label">杀敌数</text>
+        <text class="round-label">恢复数</text>
+      </view>
+      <view class="round-list">
+        <view class="round-item" wx:for="{{teamRoundData}}" wx:key="round">
+          <text class="round-cell">{{item.round}}</text>
+          <text class="round-cell">{{item.remainNum}}</text>
+          <text class="round-cell">{{item.killNum}}</text>
+          <text class="round-cell">{{item.resumeNum}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 武将回合数据区域 -->
+  <view class="battle-statistics">
+    <text class="section-title">武将回合数据</text>
+    <view class="general-tabs">
+      <view class="tab-item {{currentGeneralIndex === index ? 'active' : ''}}"
+            wx:for="{{currentGenerals}}"
+            wx:key="index"
+            bindtap="switchGeneral"
+            data-index="{{index}}">
+        <image class="tab-avatar" src="{{item.BaseInfo.AvatarUrl}}" mode="aspectFill"/>
+        <text>{{item.BaseInfo.Name}}</text>
+      </view>
+    </view>
+    <view class="round-content">
+      <view class="round-header">
+        <text class="round-label">回合</text>
+        <text class="round-label">剩余兵力</text>
+        <text class="round-label">杀敌数</text>
+        <text class="round-label">恢复数</text>
+      </view>
+      <view class="round-list">
+        <view class="round-item" wx:for="{{generalRoundData}}" wx:key="round">
+          <text class="round-cell">{{item.round}}</text>
+          <text class="round-cell">{{item.remainNum}}</text>
+          <text class="round-cell">{{item.killNum}}</text>
+          <text class="round-cell">{{item.resumeNum}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 武将攻击数据统计 -->
+  <view class="battle-statistics">
+    <text class="section-title">武将攻击数据</text>
+    <view class="general-tabs">
+      <view class="tab-item {{currentGeneralIndex === index ? 'active' : ''}}"
+            wx:for="{{currentGenerals}}"
+            wx:key="index"
+            bindtap="switchGeneral"
+            data-index="{{index}}">
+        <image class="tab-avatar" src="{{item.BaseInfo.AvatarUrl}}" mode="aspectFill"/>
+        <text>{{item.BaseInfo.Name}}</text>
+      </view>
+    </view>
+    <view class="attack-data">
+      <!-- 普通攻击数据 -->
+      <view class="attack-section">
+        <text class="attack-title">普通攻击</text>
+        <view class="attack-row">
+          <text class="attack-label">发动次数</text>
+          <text class="attack-value">{{generalAttackData.executeNormal}}</text>
+        </view>
+        <view class="attack-row">
+          <text class="attack-label">承受次数</text>
+          <text class="attack-value">{{generalAttackData.sufferNormal}}</text>
+        </view>
+      </view>
+      <!-- 兵刃攻击数据 -->
+      <view class="attack-section">
+        <text class="attack-title">兵刃攻击</text>
+        <view class="attack-row">
+          <text class="attack-label">发动次数</text>
+          <text class="attack-value">{{generalAttackData.executeWeapon}}</text>
+        </view>
+        <view class="attack-row">
+          <text class="attack-label">承受次数</text>
+          <text class="attack-value">{{generalAttackData.sufferWeapon}}</text>
+        </view>
+      </view>
+      <!-- 谋略攻击数据 -->
+      <view class="attack-section">
+        <text class="attack-title">谋略攻击</text>
+        <view class="attack-row">
+          <text class="attack-label">发动次数</text>
+          <text class="attack-value">{{generalAttackData.executeStrategy}}</text>
+        </view>
+        <view class="attack-row">
+          <text class="attack-label">承受次数</text>
+          <text class="attack-value">{{generalAttackData.sufferStrategy}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 武将效果统计区域 -->
+  <view class="battle-statistics">
+    <text class="section-title">武将效果统计</text>
+    <!-- 武将选择tab -->
+    <view class="general-tabs">
+      <view class="tab-item {{currentEffectIndex === index ? 'active' : ''}}"
+            wx:for="{{currentGenerals}}"
+            wx:key="index"
+            bindtap="switchEffectGeneral"
+            data-index="{{index}}">
+        <image class="tab-avatar" src="{{item.BaseInfo.AvatarUrl}}" mode="aspectFill"/>
+        <text>{{item.BaseInfo.Name}}</text>
+      </view>
+    </view>
+    
+    <!-- 效果类型切换tab -->
+    <view class="effect-type-tabs">
+      <view class="type-tab {{effectType === 'buff' ? 'active' : ''}}"
+            bindtap="switchEffectType"
+            data-type="buff">
+        增益效果
+      </view>
+      <view class="type-tab {{effectType === 'debuff' ? 'active' : ''}}"
+            bindtap="switchEffectType"
+            data-type="debuff">
+        减益效果
+      </view>
+    </view>
+
+    <!-- 效果统计内容 -->
+    <view class="effects-content">
+      <!-- 增益效果 -->
+      <view class="effect-list" wx:if="{{effectType === 'buff'}}">
+        <block wx:if="{{currentGeneralBuffs.length > 0}}">
+          <view class="effect-item" 
+                wx:for="{{currentGeneralBuffs}}" 
+                wx:key="name">
+            <text class="effect-name">{{item.name}}</text>
+            <view class="effect-details">
+              <view class="effect-row">
+                <text>来源: {{item.source}}</text>
+                <text wx:if="{{item.value}}">效果值: {{item.value}}</text>
+                <text wx:if="{{item.rate}}">效果率: {{item.rate}}%</text>
+              </view>
+              <view class="effect-flags">
+                <text wx:if="{{item.canRefresh}}" class="flag refresh">可刷新</text>
+                <text wx:if="{{item.avoidDispel}}" class="flag nodispel">不可驱散</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="no-effect" wx:else>
+          <text>无增益效果</text>
+        </view>
+      </view>
+
+      <!-- 减益效果 -->
+      <view class="effect-list" wx:if="{{effectType === 'debuff'}}">
+        <block wx:if="{{currentGeneralDebuffs.length > 0}}">
+          <view class="effect-item" 
+                wx:for="{{currentGeneralDebuffs}}" 
+                wx:key="name">
+            <text class="effect-name">{{item.name}}</text>
+            <view class="effect-details">
+              <view class="effect-row">
+                <text>来源: {{item.source}}</text>
+                <text wx:if="{{item.value}}">效果值: {{item.value}}</text>
+                <text wx:if="{{item.rate}}">效果率: {{item.rate}}%</text>
+              </view>
+              <view class="effect-flags">
+                <text wx:if="{{item.canRefresh}}" class="flag refresh">可刷新</text>
+                <text wx:if="{{item.avoidDispel}}" class="flag nodispel">不可驱散</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="no-effect" wx:else>
+          <text>无减益效果</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

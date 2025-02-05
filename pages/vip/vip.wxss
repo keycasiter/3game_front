@@ -1,0 +1,114 @@
+.container {
+  min-height: 100vh;
+  background: #2c2723;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.vip-benefits {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  background: #2c2723;
+  padding: 20rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+.benefit-icon {
+  width: 48rpx;
+  height: 48rpx;
+  flex-shrink: 0;
+}
+
+.benefit-info {
+  flex: 1;
+}
+
+.benefit-title {
+  font-size: 26rpx;
+  color: #d4b887;
+  margin-bottom: 4rpx;
+  display: block;
+}
+
+.benefit-desc {
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.vip-price {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 30rpx 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.price-info {
+  text-align: center;
+}
+
+.price-label {
+  font-size: 26rpx;
+  color: #d4b887;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.price-value {
+  font-size: 48rpx;
+  color: #d4b887;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.price-desc {
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.pay-section {
+  padding: 0 40rpx;
+}
+
+.pay-btn {
+  background: #d4b887;
+  color: #2c2723;
+  font-size: 32rpx;
+  padding: 20rpx 0;
+  border-radius: 8rpx;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.pay-btn:active {
+  opacity: 0.9;
+} 

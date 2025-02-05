@@ -1,0 +1,68 @@
+<view class="container">
+  <!-- 顶部搜索 -->
+  <view class="search-header">
+    <text class="search-title">战法选择</text>
+    <view class="search-box">
+      <input 
+        type="text" 
+        placeholder="请输入战法名称" 
+        value="{{searchValue}}" 
+        bindinput="onSearchInput"
+      />
+      <image class="search-icon" src="/images/icons/search.png"/>
+    </view>
+  </view>
+
+  <!-- 品质选择 -->
+  <view class="qualities">
+    <view 
+      wx:for="{{qualities}}" 
+      wx:key="value"
+      class="quality-item {{selectedQuality === item.value ? 'selected' : ''}}"
+      bindtap="selectQuality"
+      data-quality="{{item.value}}"
+    >{{item.label}}</view>
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="categories">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="*this"
+      class="category-item {{selectedCategory === item ? 'selected' : ''}}"
+      bindtap="selectCategory"
+      data-category="{{item}}"
+    >{{item}}</view>
+  </view>
+
+  <!-- 战法列表容器 -->
+  <scroll-view 
+    class="tactics-container"
+    scroll-y="true"
+    enhanced="true"
+    show-scrollbar="false"
+  >
+    <view class="tactics-grid" wx:if="{{tactics.length > 0}}">
+      <view class="tactic-item" 
+            wx:for="{{tactics}}" 
+            wx:key="id"
+            bindtap="selectTactic"
+            data-id="{{item.id}}">
+        <text class="rank">{{item.rank}}</text>
+        <text class="name">{{item.name}}</text>
+      </view>
+    </view>
+    <!-- 空数据提示 -->
+    <view class="empty-tip" wx:if="{{!loading && tactics.length === 0}}">
+      <text>暂无数据</text>
+    </view>
+  </scroll-view>
+
+  <!-- 悬浮loading效果 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view> 

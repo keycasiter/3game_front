@@ -1,0 +1,77 @@
+<view class="container">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <input 
+      type="text" 
+      placeholder="请输入阵容名称或武将姓名" 
+      value="{{searchValue}}" 
+      bindinput="onSearchInput"
+    />
+    <image class="search-icon" src="/images/icons/search.png"/>
+  </view>
+
+  <!-- 势力分类 -->
+  <view class="force-tabs">
+    <view 
+      class="tab-item {{selectedForce === item ? 'active' : ''}} {{loading ? 'disabled' : ''}}" 
+      wx:for="{{forces}}" 
+      wx:key="*this"
+      bindtap="selectForce"
+      data-force="{{item}}"
+    >{{item}}</view>
+  </view>
+
+  <!-- 兵种分类 -->
+  <view class="arm-tabs">
+    <view 
+      class="tab-item {{selectedArm === item ? 'active' : ''}} {{loading ? 'disabled' : ''}}" 
+      wx:for="{{arms}}" 
+      wx:key="*this"
+      bindtap="selectArm"
+      data-arm="{{item}}"
+    >{{item}}</view>
+  </view>
+
+  <!-- loading效果 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 推荐阵容列表 -->
+  <view class="team-list" wx:if="{{!loading}}">
+    <block wx:if="{{!showEmpty}}">
+      <view class="team-item" wx:for="{{filteredTeams}}" wx:key="Name">
+        <!-- 阵容标题和选择按钮 -->
+        <view class="team-header">
+          <view class="team-title">{{item.Name}}</view>
+          <view class="select-btn" bindtap="selectTeam" data-team="{{item}}">选择</view>
+        </view>
+        
+        <!-- 武将列表 -->
+        <view class="generals-list">
+          <view class="general-item" wx:for="{{item.GeneralList}}" wx:key="*this" wx:for-item="general">
+            <image 
+              class="general-avatar" 
+              src="{{general.BaseInfo.AvatarUrl}}" 
+              mode="aspectFill"
+            />
+            <text class="general-name">{{general.BaseInfo.Name}}</text>
+            <view class="general-tactics">
+              <text class="tactic" wx:if="{{general.BaseInfo.SelfTactic.Name}}">
+                {{general.BaseInfo.SelfTactic.Name}}
+              </text>
+              <text class="tactic" wx:for="{{general.EquipTactics}}" wx:key="Name">
+                {{item.Name}}
+              </text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 暂无数据提示 -->
+    <view class="empty-tip" wx:if="{{showEmpty}}">
+      <text>暂无推荐阵容</text>
+    </view>
+  </view>
+</view> 

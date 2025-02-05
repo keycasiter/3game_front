@@ -1,0 +1,1095 @@
+.container {
+  min-height: 100vh;
+  background: #2c2723;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-family: "隶书", "LiSu", serif;
+}
+
+/* 顶部标题栏 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 60rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.team-title {
+  display: none;
+}
+
+.team-title.my,
+.team-title.enemy {
+  display: none;
+}
+
+/* 对战结果 */
+.battle-result {
+  text-align: center;
+  padding: 0;
+  margin: -60rpx 0 10rpx;
+}
+
+.result-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #d4b887;
+}
+
+.total-power {
+  display: none;
+}
+
+/* 武将列表 */
+.generals-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.general-card {
+  width: calc((100% - 40rpx) / 3);
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* 武将头像和身份 */
+.general-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid rgba(212, 184, 135, 0.3);
+  margin-bottom: 20rpx;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  margin-bottom: 10rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  color: #d4b887;
+  margin-bottom: 10rpx;
+}
+
+.role {
+  font-size: 28rpx;
+  color: #d4b887;
+  padding: 4rpx 20rpx;
+  background: #2c2723;
+  border: 1px solid #d4b887;
+  border-radius: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 战法列表 */
+.tactics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  flex: 1;
+  min-height: 0;
+}
+
+.tactic-item {
+  background: #2c2723;
+  padding: 12rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  margin-bottom: 10rpx;
+}
+
+.tactic-name {
+  font-size: 26rpx;
+  color: #d4b887;
+  margin-bottom: 8rpx;
+  display: block;
+  text-align: center;
+}
+
+.tactic-stats {
+  display: flex;
+  flex-direction: column;
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+  padding: 0 10rpx;
+}
+
+/* 统计数据项 */
+.stat-item {
+  padding: 4rpx 0;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* 对战结果状态样式 */
+.result-text.win {
+  color: #e6b322;
+}
+
+.result-text.lose {
+  color: #d81e06;
+}
+
+.result-text.draw {
+  color: #8f8f8f;
+}
+
+.result-text.advantage-draw {
+  color: #b8860b;
+}
+
+.result-text.inferiority-draw {
+  color: #cd5c5c;
+}
+
+/* 切换按钮样式 */
+.team-switch {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 20rpx;
+  background: #3a342f;
+  margin: 20rpx;
+  align-items: center;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+}
+
+.team-switch button {
+  flex: 1;
+  max-width: 200rpx;
+  font-size: 28rpx;
+  padding: 10rpx 0;
+  background: #2c2723;
+  border: 1px solid #d4b887;
+  color: #d4b887;
+  line-height: 1.5;
+  border-radius: 4rpx;
+}
+
+.team-switch button.active {
+  background: #d4b887;
+  color: #2c2723;
+}
+
+.vs-icon {
+  font-size: 24rpx;
+  color: #d4b887;
+  font-weight: bold;
+  padding: 0 8rpx;
+}
+
+/* 兵力进度条样式 */
+.power-bar-container {
+  grid-column: span 2;  /* 让血条占据两列 */
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.power-bar {
+  width: 100%;
+  height: 20rpx;
+  background: rgba(212, 184, 135, 0.1);
+  border-radius: 10rpx;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.power-progress {
+  height: 100%;
+  background: #d4b887;
+  transition: width 0.3s ease;
+}
+
+.power-text {
+  font-size: 24rpx;
+  color: #d4b887;
+  text-align: right;
+  display: block;
+  font-family: monospace;
+}
+
+/* 武将兵力信息 */
+.soldier-info {
+  font-size: 24rpx;
+  color: #d4b887;
+  margin-top: 4rpx;
+  opacity: 0.8;
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+/* 战斗统计区域 */
+.battle-stats-container {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 杀敌恢复统计行 */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  padding: 0 10rpx;
+}
+
+.stats-text {
+  font-size: 28rpx;
+  color: #d4b887;
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+/* 武将数据统计布局 */
+.general-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 12rpx;
+  box-sizing: border-box;
+  margin-top: 10rpx;
+}
+
+.stats-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  flex-shrink: 0;
+  width: 50rpx;
+}
+
+.stats-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6rpx;
+  flex: 1;
+  margin-left: 16rpx;
+  min-width: 0;
+  width: 0;
+}
+
+.stats-labels .soldier-info,
+.stats-values .soldier-info {
+  margin-top: 2rpx;
+  line-height: 1.5;
+}
+
+/* 统计标签样式 */
+.stat-label {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* 整数值显示 */
+.stats-values .soldier-info {
+  width: 100%;
+  font-size: 22rpx;
+  overflow: hidden;
+}
+
+/* 回合数据样式 */
+.round-data-container {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+
+.round-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+
+.round-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 0;
+  border-bottom: 1px solid rgba(212, 184, 135, 0.3);
+  font-size: 24rpx;
+}
+
+.round-list {
+  margin-top: 10rpx;
+}
+
+.round-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8rpx 0;
+}
+
+.round-cell {
+  flex: 1;
+  font-size: 24rpx;
+  color: #d4b887;
+  text-align: center;
+  padding: 0 4rpx;
+  font-family: monospace;
+}
+
+.round-cell.loss {
+  color: #d4b887;
+}
+
+/* 武将回合数据样式 */
+.general-round-header {
+  padding: 16rpx 0;
+  margin-top: 20rpx;
+  border-top: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.general-round-header:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.general-round-header .general-name {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+}
+
+/* 武将战斗数据统计样式 */
+.battle-stats-section {
+  padding: 16rpx;
+  margin-top: 16rpx;
+  border-top: 1px solid rgba(212, 184, 135, 0.2);
+}
+
+.stats-section-title {
+  font-size: 26rpx;
+  color: #d4b887;
+  margin-bottom: 12rpx;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.stats-value {
+  font-size: 28rpx;
+  color: #d4b887;
+  font-family: monospace;
+}
+
+/* 效果统计样式 */
+.effect-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.effect-group {
+  width: 100%;
+}
+
+.effect-group + .effect-group {
+  margin-top: 16rpx;
+}
+
+.effect-title {
+  font-size: 24rpx;
+  color: #d4b887;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.effect-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12rpx;
+  padding: 12rpx;
+}
+
+.effect-item {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.effect-name {
+  font-size: 24rpx;
+  color: #d4b887;
+  margin-bottom: 8rpx;
+  padding-bottom: 8rpx;
+  border-bottom: 1px solid rgba(212, 184, 135, 0.1);
+  text-align: center;
+}
+
+.effect-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  flex: 1;
+}
+
+.effect-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.effect-row text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.effect-flags {
+  display: flex;
+  gap: 8rpx;
+  margin-top: auto;
+  padding-top: 8rpx;
+  justify-content: center;
+  border-top: 1px solid rgba(212, 184, 135, 0.1);
+}
+
+.effect-flags .flag {
+  font-size: 20rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  background: rgba(212, 184, 135, 0.1);
+  white-space: nowrap;
+}
+
+/* 队伍统计数据 */
+.team-statistics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  padding: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.team-statistics .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 16rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+.stat-item .label {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.stat-item .value {
+  font-size: 28rpx;
+  color: #d4b887;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+/* 武将战斗数据 */
+.general-stats {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 武将兵力血条 */
+.general-stats .power-bar-container {
+  width: 100%;
+  background: #2c2723;
+  padding: 12rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  box-sizing: border-box;
+}
+
+.general-stats .power-bar {
+  width: 100%;
+  height: 16rpx;
+  background: rgba(212, 184, 135, 0.1);
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.general-stats .power-progress {
+  height: 100%;
+  background: #d4b887;
+  transition: width 0.3s ease;
+}
+
+.general-stats .power-text {
+  font-size: 20rpx;
+  color: #d4b887;
+  text-align: right;
+  display: block;
+  font-family: monospace;
+  padding: 0 4rpx;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+/* 其他统计数据行 */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rpx 12rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+.stat-row .label {
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.stat-row .value {
+  font-size: 20rpx;
+  color: #d4b887;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: visible;
+  padding: 0 4rpx;
+}
+
+/* 战斗统计区域 */
+.battle-statistics {
+  margin-top: 20rpx;
+  padding: 16rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+}
+
+/* 战斗统计区域特殊样式 */
+.battle-statistics.tactic-statistics {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.tactic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.tactic-item {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.tactic-name {
+  font-size: 26rpx;
+  color: #d4b887;
+  display: block;
+  margin-bottom: 12rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tactic-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.stat-text {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+  text-align: left;
+  white-space: nowrap;
+  overflow: visible;
+  padding: 0 4rpx;
+}
+
+/* 普通攻击统计 */
+.attack-stats {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+.stat-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+/* 伍数据统计样式 */
+.team-stats {
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+}
+
+/* 添加标题样式 */
+.stats-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+  margin-bottom: 16rpx;
+  font-weight: bold;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12rpx;
+}
+
+.stats-item {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.stats-value {
+  font-size: 28rpx;
+  color: #d4b887;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+/* 武将效果统计区域 */
+.effects-statistics-area {
+  margin-top: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+/* 武将换tab */
+.general-tabs {
+  display: flex;
+  background: #2c2723;
+  border-bottom: 1px solid #d4b887;
+}
+
+.tab-item {
+  flex: 1;
+  padding: 16rpx 0;
+  text-align: center;
+  color: #d4b887;
+  font-size: 28rpx;
+  position: relative;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.tab-item.active {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 4rpx;
+  background: #d4b887;
+  border-radius: 2rpx;
+}
+
+.tab-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+/* 效果统计内容 */
+.effect-content {
+  padding: 20rpx;
+}
+
+.effect-section {
+  margin-top: 20rpx;
+}
+
+.effect-section:first-child {
+  margin-top: 0;
+}
+
+.sub-title {
+  font-size: 26rpx;
+  color: #d4b887;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.effect-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.effect-item {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.effect-name {
+  font-size: 24rpx;
+  color: #d4b887;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.effect-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+  padding-left: 12rpx;
+}
+
+/* 武将回合数据区域 */
+.round-statistics-area {
+  margin-top: 20rpx;
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+/* 武将切换tab */
+.general-tabs {
+  display: flex;
+  background: #2c2723;
+  border-bottom: 1px solid #d4b887;
+}
+
+.tab-item {
+  flex: 1;
+  padding: 20rpx 0;
+  text-align: center;
+  color: #d4b887;
+  font-size: 28rpx;
+  position: relative;
+  opacity: 0.8;
+}
+
+.tab-item.active {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 4rpx;
+  background: #d4b887;
+  border-radius: 2rpx;
+}
+
+/* 回合数据内容 */
+.round-content {
+  padding: 20rpx;
+}
+
+.round-data {
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.round-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 16rpx;
+  background: rgba(212, 184, 135, 0.1);
+  border-bottom: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.round-label {
+  font-size: 24rpx;
+  color: #d4b887;
+  text-align: center;
+}
+
+.round-list {
+  padding: 8rpx 0;
+}
+
+.round-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 12rpx 16rpx;
+}
+
+.round-cell {
+  font-size: 24rpx;
+  color: #d4b887;
+  text-align: center;
+  font-family: monospace;
+}
+
+/* 修改标题样式 */
+.battle-statistics .section-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  display: block;
+  margin-bottom: 16rpx;
+  font-weight: bold;
+  text-align: center;
+  padding: 16rpx 0;
+}
+
+/* 效果标记样式 */
+.effect-flags {
+  display: flex;
+  gap: 8rpx;
+  margin-top: 4rpx;
+}
+
+.effect-flags .flag {
+  font-size: 20rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  background: rgba(212, 184, 135, 0.1);
+}
+
+.effect-flags .refresh {
+  color: #8fbc8f;
+}
+
+.effect-flags .nodispel {
+  color: #daa520;
+}
+
+/* 效果类型切换tab */
+.effect-type-tabs {
+  display: flex;
+  background: #2c2723;
+  border-bottom: 1px solid #d4b887;
+  margin-top: 12rpx;
+}
+
+.type-tab {
+  flex: 1;
+  padding: 16rpx 0;
+  text-align: center;
+  color: #d4b887;
+  font-size: 26rpx;
+  position: relative;
+  opacity: 0.8;
+}
+
+.type-tab.active {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.type-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 4rpx;
+  background: #d4b887;
+  border-radius: 2rpx;
+}
+
+/* 无效果提示样式 */
+.no-effect {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #d4b887;
+  opacity: 0.6;
+  font-size: 26rpx;
+  background: #2c2723;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  border-radius: 4rpx;
+}
+
+/* 武将攻击数据样式 */
+.attack-data {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  padding: 20rpx;
+}
+
+.attack-section {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.attack-title {
+  font-size: 26rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+  margin-bottom: 12rpx;
+  padding-bottom: 8rpx;
+  border-bottom: 1px solid rgba(212, 184, 135, 0.1);
+}
+
+.attack-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rpx 0;
+}
+
+.attack-label {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.attack-value {
+  font-size: 24rpx;
+  color: #d4b887;
+  font-family: monospace;
+}
+
+/* 分享按钮样式 */
+.share-btn {
+  position: fixed;
+  left: 50%;
+  bottom: 120rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0;
+  margin: 0;
+  min-width: 120rpx;
+  background: linear-gradient(135deg, #d4b887 0%, #9a7c4f 100%);
+  border-radius: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(212, 184, 135, 0.3);
+  z-index: 100;
+  font-size: 24rpx;
+  color: #2c2723;
+  font-weight: bold;
+  transform: translateX(-50%);
+  animation: floatIn 0.3s ease-out;
+}
+
+@keyframes floatIn {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.share-btn::after {
+  border: none;
+}
+
+.share-btn:active {
+  transform: translate(-50%, 0) scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(212, 184, 135, 0.2);
+}
+ 

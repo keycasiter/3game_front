@@ -1,0 +1,30 @@
+<view class="container">
+  <!-- 顶部背景 -->
+  <view class="header">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="title">三国志战略版计算器</text>
+  </view>
+
+  <!-- 用户信息区域 -->
+  <view class="user-info" wx:if="{{userInfo}}">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+    <text class="nickname">{{userInfo.nickName}}</text>
+  </view>
+
+  <!-- 登录按钮区域 -->
+  <view class="login-area">
+    <button class="login-btn" bindtap="handleLogin" wx:if="{{!userInfo}}">
+      <image class="wechat-icon" src="/images/icons/wechat.png" mode="aspectFit"></image>
+      <text>微信一键登录</text>
+    </button>
+    <button class="start-btn" bindtap="handleStart" wx:if="{{userInfo}}">开始使用</button>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer">
+    <text class="tips">登录即表示同意</text>
+    <text class="link" bindtap="showUserAgreement">《用户协议》</text>
+    <text class="tips">和</text>
+    <text class="link" bindtap="showPrivacyPolicy">《��私政策》</text>
+  </view>
+</view> 

@@ -1,0 +1,811 @@
+.container {
+  min-height: 100vh;
+  background: #2c2723;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-family: "隶书", "LiSu", serif;
+  padding-bottom: 80rpx;
+}
+
+/* 用户信息区域 */
+.user-info {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  border: 2rpx solid #d4b887;
+  margin-right: 20rpx;
+}
+
+.user-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.nickname {
+  font-size: 32rpx;
+  color: #d4b887;
+  font-weight: bold;
+}
+
+.user-level-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.uid {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.level-tag {
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 20rpx;
+  color: #2c2723;
+}
+
+/* 不同等级样式 */
+.level-0 {
+  background: #d4b887;  /* 普通 - 铜色 */
+}
+
+.level-1 {
+  background: linear-gradient(to right, #C0C0C0, #E8E8E8);  /* 白银 */
+}
+
+.level-2 {
+  background: linear-gradient(to right, #FFD700, #FFF8DC);  /* 黄金 */
+}
+
+.level-3 {
+  background: linear-gradient(to right, #B4F8FF, #E6FCFF);  /* 钻石 */
+  box-shadow: 0 0 10rpx rgba(180, 248, 255, 0.5);
+}
+
+.login-btn {
+  background: #d4b887;
+  color: #2c2723;
+  font-size: 32rpx;
+  padding: 20rpx 60rpx;
+  border-radius: 30rpx;
+  border: none;
+}
+
+/* 数据统计 */
+.stats-bar {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.stats-divider {
+  height: 1px;
+  background: rgba(212, 184, 135, 0.3);
+  margin: 0 40rpx;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  flex: 1;
+}
+
+.stat-item .number {
+  font-size: 36rpx;
+  color: #d4b887;
+  font-weight: bold;
+}
+
+.stat-item .label {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+/* 功能菜单 */
+.menu-list {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  border-bottom: 1px solid rgba(212, 184, 135, 0.3);
+  position: relative;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-120rpx);
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.8;
+}
+
+.menu-text {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  margin-left: 0;
+}
+
+.arrow {
+  position: absolute;
+  right: 30rpx;
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.6;
+}
+
+/* 版本信息 */
+.version-info {
+  text-align: center;
+  padding: 20rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #2c2723;
+}
+
+.version-info text {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.6;
+}
+
+/* 按钮点击效果 */
+.menu-item:active,
+.social-item:active {
+  opacity: 0.8;
+}
+
+/* 所有按钮使用统一字体 */
+button {
+  font-family: "隶书", "LiSu", serif;
+}
+
+.menu-item .arrow {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: auto;
+}
+
+/* 退出登录按钮样式 */
+.logout {
+  border-top: 1px solid rgba(212, 184, 135, 0.2);
+}
+
+.logout .menu-text {
+  color: #d4b887;
+}
+
+/* 登录蒙层 */
+.login-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(44, 39, 35, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 98;
+}
+
+.login-form {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 40rpx;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.avatar-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.avatar-btn text {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+.nickname-input {
+  width: 100%;
+  height: 80rpx;
+  background: #2c2723;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  color: #d4b887;
+  font-size: 28rpx;
+}
+
+.phone-btn {
+  width: 100%;
+  background: #2c2723;
+  color: #d4b887;
+  border: 1px solid #d4b887;
+}
+
+.login-btn[disabled] {
+  opacity: 0.5;
+}
+
+/* 授权弹窗样式 */
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.auth-content {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 40rpx;
+  width: 80%;
+  text-align: center;
+}
+
+.auth-title {
+  font-size: 32rpx;
+  color: #d4b887;
+  margin-bottom: 20rpx;
+}
+
+.auth-desc {
+  font-size: 28rpx;
+  color: #d4b887;
+  margin-bottom: 30rpx;
+}
+
+.auth-btn {
+  background: #d4b887;
+  color: #2c2723;
+  font-size: 28rpx;
+  padding: 16rpx 0;
+  border-radius: 8rpx;
+}
+
+.auth-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.preview-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 2rpx solid #d4b887;
+}
+
+.preview-nickname {
+  font-size: 32rpx;
+  color: #d4b887;
+}
+
+.auth-input {
+  width: 300rpx;
+  height: 80rpx;
+  background: #2c2723;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  color: #d4b887;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.avatar-section,
+.nickname-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.avatar-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.avatar-tip {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.preview-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 2rpx solid #d4b887;
+}
+
+.preview-nickname {
+  font-size: 32rpx;
+  color: #d4b887;
+  margin-bottom: 10rpx;
+}
+
+.confirm-btn {
+  margin-top: 20rpx;
+}
+
+.confirm-btn[disabled] {
+  opacity: 0.5;
+  background: rgba(212, 184, 135, 0.5);
+}
+
+/* 常用武将和战法统计 */
+.freq-stats {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+}
+
+.freq-section {
+  margin-bottom: 20rpx;
+}
+
+.freq-section:last-child {
+  margin-bottom: 0;
+}
+
+.freq-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.freq-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.freq-item {
+  background: #2c2723;
+  padding: 12rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.freq-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 4rpx;
+}
+
+.freq-name {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+.freq-times {
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+/* 常用武将样式 */
+.freq-generals {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+  margin-bottom: 16rpx;
+  font-weight: bold;
+}
+
+.general-list {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 0 20rpx;
+}
+
+.general-item {
+  background: #2c2723;
+  padding: 12rpx 20rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.general-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  border: 1px solid #d4b887;
+}
+
+.general-name {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+.use-times {
+  font-size: 22rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+/* 调整统计栏样式以适应更多项目 */
+.stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  padding: 16rpx;
+}
+
+.stat-item {
+  flex: 1;
+  min-width: 160rpx;
+}
+
+/* 常用阵容样式 */
+.freq-teams {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.team-item {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-generals {
+  display: flex;
+  gap: 20rpx;
+}
+
+.team-general {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.team-general-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  border: 1px solid #d4b887;
+}
+
+.team-general-name {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+.team-times {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+.team-name {
+  font-size: 24rpx;
+  color: #d4b887;
+  text-align: center;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+/* 常用战法样式 */
+.freq-tactics {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+}
+
+.tactics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.tactic-item {
+  background: #2c2723;
+  padding: 16rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tactic-name {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+.tactic-times {
+  font-size: 24rpx;
+  color: #d4b887;
+  opacity: 0.8;
+}
+
+/* 统一容器样式 */
+.user-info,
+.stats-bar,
+.freq-generals,
+.freq-teams,
+.freq-tactics,
+.menu-list {
+  background: #3a342f;
+  border: 1px solid #d4b887;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin: 0 20rpx 20rpx 20rpx;  /* 统一外边距：上 右 下 左 */
+  width: auto;  /* 让宽度由外边距决定 */
+}
+
+/* 移除原有的 margin 设置 */
+.freq-generals,
+.freq-teams,
+.freq-tactics {
+  margin: 0 20rpx 20rpx 20rpx;  /* 覆盖原有的 margin: 20rpx */
+}
+
+/* 统计区域标题栏样式 */
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+/* 对战记录按钮样式 */
+.record-btn {
+  background: #2c2723;
+  padding: 8rpx 20rpx;
+  border-radius: 4rpx;
+  border: 1px solid rgba(212, 184, 135, 0.3);
+}
+
+.record-btn text {
+  font-size: 24rpx;
+  color: #d4b887;
+}
+
+/* 分享按钮样式 */
+.share-btn {
+  background: none;
+  font-weight: normal;
+  line-height: normal;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.share-btn::after {
+  border: none;
+}
+
+.share-btn .menu-text {
+  font-size: 28rpx;
+  color: #d4b887;
+}
+
+.level-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.upgrade-btn {
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  background: #d4b887;
+  color: #2c2723;
+  border-radius: 20rpx;
+}
+
+/* loading 蒙层样式 */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(44, 39, 35, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #d4b887;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #d4b887;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 登录区域样式 */
+.login-section {
+  position: relative;
+  width: 100%;
+  height: 460rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.login-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.avatar-placeholder {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+.login-tip {
+  font-size: 28rpx;
+  color: #fff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
+}
+
+.login-btn {
+  background: #fff;
+  border: none;
+  border-radius: 44rpx;
+  padding: 0 48rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #2c2723;
+  font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+.wechat-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.login-btn::after {
+  border: none;
+}
+  

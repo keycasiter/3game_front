@@ -1,0 +1,43 @@
+/* 武将列表样式调整 */
+.generals {
+  display: flex;
+  gap: 16rpx;
+}
+
+.general {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 16rpx;
+  border-radius: 6rpx;
+  border: 1px solid rgba(181, 145, 85, 0.4);
+}
+
+.general-name {
+  font-size: 26rpx;
+  color: #8b6831;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 移除头像相关样式 */
+.general-avatar {
+  display: none;
+}
+
+.container {
+  min-height: 100vh;
+  background: #f5e6d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.developing-text {
+  font-size: 32rpx;
+  color: #8b6831;
+  text-align: center;
+} 

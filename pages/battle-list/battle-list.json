@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "对战记录",
+  "onReachBottomDistance": 50,
+  "enablePullDownRefresh": false
+} 

@@ -1,0 +1,194 @@
+<!--pages/mine/mine.wxml-->
+<view class="container">
+  <!-- 未登录状态 -->
+  <view class="login-section" wx:if="{{!userInfo}}">
+    <image class="login-bg" src="/images/login-bg.png" mode="aspectFill"/>
+    <view class="login-content">
+      <image class="avatar-placeholder" src="/images/default-avatar.png"/>
+      <text class="login-tip">登录体验更多功能</text>
+      <button 
+        class="login-btn"
+        open-type="getPhoneNumber" 
+        bindgetphonenumber="getPhoneNumber">
+        <image class="wechat-icon" src="/images/wechat.png" mode="aspectFit"/>
+        手机号快捷登录
+      </button>
+    </view>
+  </view>
+
+  <!-- 已登录内容 -->
+  <block wx:if="{{userInfo}}">
+    <!-- 用户信息区域 -->
+    <view class="user-info">
+      <image 
+        class="avatar" 
+        src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" 
+        mode="aspectFill"
+      />
+      <view class="user-detail">
+        <text class="nickname">{{userInfo.nickName}}</text>
+        <view class="user-level-info">
+          <text class="uid" bindtap="copyUid">UID: {{userInfo.Uid}}</text>
+          <view class="level-info">
+            <view class="level-tag level-{{userInfo.Level || 0}}">
+              {{levelNames[userInfo.Level || 0]}}
+            </view>
+            <view class="upgrade-btn" bindtap="upgradeVip" wx:if="{{userInfo.Level === 0}}">
+              联系客服
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据统计 -->
+    <view class="stats-bar">
+      <view class="stats-header">
+        <text class="section-title">模拟对战汇总</text>
+        <view class="record-btn" bindtap="navigateTo" data-url="/pages/battle-list/battle-list">
+          <text>对战记录</text>
+        </view>
+      </view>
+      <!-- 第一行：对战场次和胜率 -->
+      <view class="stats-row">
+        <view class="stat-item">
+          <text class="number">{{battleStats.totalCnt}}</text>
+          <text class="label">对战场次</text>
+        </view>
+        <view class="stat-item">
+          <text class="number">{{battleStats.winRate}}%</text>
+          <text class="label">胜率</text>
+        </view>
+      </view>
+      
+      <!-- 分隔线 -->
+      <view class="stats-divider"></view>
+      
+      <!-- 第二行：胜负平数据 -->
+      <view class="stats-row">
+        <view class="stat-item">
+          <text class="number">{{battleStats.winCnt}}</text>
+          <text class="label">胜利</text>
+        </view>
+        <view class="stat-item">
+          <text class="number">{{battleStats.drawCnt}}</text>
+          <text class="label">平局</text>
+        </view>
+        <view class="stat-item">
+          <text class="number">{{battleStats.loseCnt}}</text>
+          <text class="label">失败</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 常用武将展示 -->
+    <view class="freq-generals" wx:if="{{battleStats.highFreqGenerals.length > 0}}">
+      <text class="section-title">常用武将</text>
+      <view class="general-list">
+        <view class="general-item" wx:for="{{battleStats.highFreqGenerals}}" wx:key="name">
+          <image class="general-avatar" src="{{item.avatar}}" mode="aspectFill"/>
+          <text class="general-name">{{item.name}}</text>
+          <text class="use-times">{{item.times}}次出场</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 常用阵容展示 -->
+    <view class="freq-teams" wx:if="{{battleStats.highFreqTeams.length > 0}}">
+      <text class="section-title">常用阵容</text>
+      <view class="team-list">
+        <view class="team-item" wx:for="{{battleStats.highFreqTeams}}" wx:key="name">
+          <view class="team-generals">
+            <view class="team-general" wx:for="{{item.generals}}" wx:key="name" wx:for-item="general">
+              <image class="team-general-avatar" src="{{general.avatar}}" mode="aspectFill"/>
+              <text class="team-general-name">{{general.name}}</text>
+            </view>
+          </view>
+          <text class="team-times">{{item.times}}次出场</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 常用战法展示 -->
+    <view class="freq-tactics" wx:if="{{battleStats.highFreqTactics.length > 0}}">
+      <text class="section-title">常用战法</text>
+      <view class="tactics-list">
+        <view class="tactic-item" wx:for="{{battleStats.highFreqTactics}}" wx:key="name">
+          <text class="tactic-name">{{item.name}}</text>
+          <text class="tactic-times">{{item.times}}次出场</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能菜单 -->
+    <view class="menu-list">
+      <view class="menu-item">
+        <button class="share-btn" open-type="share">
+          <text class="menu-text">分享小程序</text>
+        </button>
+      </view>
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/feedback/feedback">
+        <text class="menu-text">反馈&建议</text>
+      </view>
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/about/about">
+        <text class="menu-text">关于我们</text>
+      </view>
+      <!-- 退出登录按钮 -->
+      <view class="menu-item" wx:if="{{userInfo}}" bindtap="logout">
+        <image class="menu-icon" src="/images/icons/logout.png"/>
+        <text class="menu-text">退出登录</text>
+        <image class="arrow" src="/images/icons/arrow-right.png"/>
+      </view>
+    </view>
+  </block>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>三战配将候 v1.0.0</text>
+  </view>
+
+  <!-- 用户信息授权弹窗 -->
+  <view class="auth-modal" wx:if="{{showAuthModal}}">
+    <view class="auth-content">
+      <view class="auth-title">授权提示</view>
+      <view class="auth-desc">请设置您的头像和昵称</view>
+      <view class="auth-inputs">
+        <!-- 头像选择/预览区域 -->
+        <view class="avatar-section">
+          <button class="avatar-btn" 
+            open-type="chooseAvatar" 
+            bindchooseavatar="onChooseAvatar">
+            <image 
+              class="preview-avatar" 
+              src="{{tempUserInfo.avatarUrl || '/images/default-avatar.png'}}" 
+              mode="aspectFill"/>
+            <text class="avatar-tip">{{tempUserInfo.avatarUrl ? '' : '点击选择头像'}}</text>
+          </button>
+        </view>
+        <!-- 昵称输入/预览区域 -->
+        <view class="nickname-section">
+          <text wx:if="{{tempUserInfo.nickName}}" 
+            class="preview-nickname">{{tempUserInfo.nickName}}</text>
+          <input type="nickname" 
+            class="auth-input" 
+            placeholder="请输入昵称" 
+            bindinput="onInputNickname"/>
+        </view>
+        <!-- 确认按钮 -->
+        <button class="auth-btn confirm-btn" 
+          bindtap="confirmAuth"
+          disabled="{{!tempUserInfo.avatarUrl || !tempUserInfo.nickName}}">
+          确认
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 在最后添加 loading 蒙层 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view>

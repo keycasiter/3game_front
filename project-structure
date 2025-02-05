@@ -1,0 +1,32 @@
+miniprogram/
+├── components/         // 自定义组件
+│   ├── battle-field/   // 对战场地组件
+│   ├── player-card/    // 玩家信息卡片
+│   └── battle-result/  // 对战结果展示
+├── images/            // 图片资源
+│   ├── generals/      // 武将图片目录
+│   │   ├── zhang-bao-1.png  // 张宝立绘1
+│   │   ├── zhang-bao-2.png  // 张宝立绘2
+│   │   └── zhang-bao-3.png  // 张宝立绘3
+│   ├── icons/        // 图标目录
+│   │   ├── sound.png     // 声音图标
+│   │   ├── bow.png       // 弓兵图标
+│   │   ├── shield.png    // 盾兵图标
+│   │   ├── spear.png     // 枪兵图标
+│   │   └── horse.png     // 骑兵图标
+│   └── social/       // 社交媒体图标
+│       ├── bilibili.png  // B站图标
+│       ├── tiktok.png    // 抖音图标
+│       └── wechat.png    // 微信图标
+├── pages/             // 页面文件
+│   ├── index/        // 首页
+│   ├── battle/       // 新增对战页面
+│   ├── mine/         // 我的
+│   └── category/     // 分类页
+├── services/         // API 服务
+├── styles/           // 公共样式
+├── utils/            // 工具函数
+├── app.js            // 小程序入口文件
+├── app.json          // 小程序全局配置
+├── app.wxss          // 小程序全局样式
+└── project.config.json   // 项目配置文件 
